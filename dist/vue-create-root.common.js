@@ -1,6 +1,6 @@
 /*!
- * AnyTouch.js v0.0.3
- * (c) 2019-2019 Russell
+ * AnyTouch.js v0.0.5
+ * (c) 2019-2022 Russell
  * https://github.com/any86/vue-create-root
  * Released under the MIT License.
  */
@@ -55,7 +55,7 @@ var INSERT_POSITION_MAP = {
     insertBefore: 'beforebegin'
 };
 
-var createRoot = function (Vue, component, data, childrenRender, options) {
+var createRoot = function (Vue, componentObject, data, childrenRender, options) {
     if (options === void 0) { options = {}; }
     var _a = options.target, target = _a === void 0 ? 'body' : _a, _b = options.insertPosition, insertPosition = _b === void 0 ? 'append' : _b;
     var vNodeData;
@@ -69,8 +69,7 @@ var createRoot = function (Vue, component, data, childrenRender, options) {
     var root = new Vue({
         el: el,
         render: function (createElement) {
-            var rootComponent = createElement(component, vNodeData, _childrenRender && _childrenRender(createElement));
-            return rootComponent;
+            return createElement(componentObject, vNodeData, _childrenRender && _childrenRender(createElement));
         },
     });
     var rootComponent = root.$children[0];
@@ -143,9 +142,9 @@ function install(Vue, _a) {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        createRoot.apply(void 0, __spread([Vue], args));
+        return createRoot.apply(void 0, __spread([Vue], args));
     };
-    Vue.createRootClass.version = '0.0.3';
+    Vue.createRootClass.version = '0.0.5';
 }
 var main = { install: install };
 
